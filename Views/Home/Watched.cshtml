@@ -1,0 +1,12 @@
+<h1 class="white">Watched</h1>
+        <ol>
+@{
+    foreach (var movie in ViewBag.Watched)
+    {
+        if(@movie.UserId == Context.Session.GetInt32("UserId"))
+        {
+        <li class="white"><img class="small-poster" src="https://www.themoviedb.org/t/p/w500/@movie.Poster_Path" alt="movie poster"> @movie.Title @movie.PersonalRating.ToString("0.0")/10</li>
+        }
+    }
+}
+        </ol>

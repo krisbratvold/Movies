@@ -1,0 +1,24 @@
+@model WatchedMovie
+<h1 class="white">Watchlist</h1>
+        <ol>
+@{
+    foreach (var movie in ViewBag.Watchlist)
+    {
+        if(@movie.UserId == Context.Session.GetInt32("UserId"))
+        {
+            <li class="white" ><img class="small-poster" src="https://www.themoviedb.org/t/p/w500/@movie.Poster_Path" alt="movie poster"> @movie.Title</li>
+            <form asp-action="AddToWatched" method="POST" asp-route-movieId="@movie.MovieId">
+                <div class="form-group">
+                <label class="white" asp-for="PersonalRating">Rating</label>
+                <span asp-validation-for="PersonalRating"></span>
+                <input class="small" asp-for="PersonalRating">
+                <input type="hidden" asp-for="MovieId" value="@movie.MovieId">
+                <input type="hidden" asp-for="Title" value="@movie.Title">
+                <input type="hidden" asp-for="Poster_Path" value="@movie.Poster_Path">
+                </div>
+            <button class="mb-4 btn btn-primary">Watched</button>
+            </form>
+        }
+    }
+}
+        </ol>

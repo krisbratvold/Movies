@@ -1,0 +1,24 @@
+<div class="movies">
+    @{
+        foreach (var movie in ViewBag.movies.Results)
+        {
+            <div class="movie">
+                <img class="poster" src="https://www.themoviedb.org/t/p/w500/@movie.Poster_Path" alt="movie poster">
+                <a class="white" asp-action="ViewMovie" asp-route-movieId=@movie.Id>@movie.Title</a>
+            </div>
+        }
+    }
+</div>
+<div class="bot">
+    @{
+        if (Context.Session.GetInt32("Page") != 1)
+        {
+            <form asp-action="Prev" method="get">
+                <button class="btn btn-primary">Previous Page</button>
+            </form>
+        }
+    }
+    <form asp-action="Next" method="get">
+        <button class="btn btn-primary">Next Page</button>
+    </form>
+</div>

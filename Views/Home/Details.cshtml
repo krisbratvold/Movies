@@ -1,0 +1,13 @@
+@model UnwatchedMovie
+<h1 class="white">@ViewBag.SingleMovie.Title</h1>
+<img class="poster" src="https://www.themoviedb.org/t/p/w500/@ViewBag.SingleMovie.Poster_Path" alt="movie poster">
+<p class="white" >Overview: @ViewBag.SingleMovie.Overview</p>
+<p class="white">Rating: @ViewBag.SingleMovie.Vote_Average/10 </p>
+<p class="white">Release Date: @ViewBag.SingleMovie.Release_Date.ToString("MM/dd/yyyy")</p>
+<form asp-action="AddToWatch" method="POST">
+    <input type="hidden" asp-for="MovieId" value="@ViewBag.SingleMovie.Id">
+    <input type="hidden" asp-for="Title" value="@ViewBag.SingleMovie.Title">
+    <input type="hidden" asp-for="Poster_Path" value="@ViewBag.SingleMovie.Poster_Path">
+    <p class="text-danger">@Html.ValidationMessage("validate")</p> 
+    <button class="btn btn-primary">Add to Watchlist</button>
+</form>
